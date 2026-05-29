@@ -2,7 +2,6 @@ package com.shantanu.fraud.service;
 
 import com.shantanu.fraud.dto.FraudCaseRequest;
 import com.shantanu.fraud.dto.FraudCaseResponse;
-import com.shantanu.fraud.entity.FraudCase;
 import com.shantanu.fraud.exception.ResourceNotFoundException;
 import com.shantanu.fraud.mapper.FraudCaseMapper;
 import com.shantanu.fraud.repository.FraudCaseRepository;
@@ -11,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

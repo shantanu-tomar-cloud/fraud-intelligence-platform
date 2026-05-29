@@ -2,7 +2,6 @@ package com.shantanu.fraud.controller;
 
 import com.shantanu.fraud.dto.FraudCaseRequest;
 import com.shantanu.fraud.dto.FraudCaseResponse;
-import com.shantanu.fraud.entity.FraudCase;
 import com.shantanu.fraud.service.FraudCaseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
