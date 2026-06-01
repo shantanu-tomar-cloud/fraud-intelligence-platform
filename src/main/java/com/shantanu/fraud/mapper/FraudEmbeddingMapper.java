@@ -9,12 +9,13 @@ import com.shantanu.fraud.entity.FraudEmbedding;
 public class FraudEmbeddingMapper {
 
     public static FraudEmbedding toEntity(
-            FraudEmbeddingRequest request, FraudCase fraudCase) {
+            FraudEmbeddingRequest request, FraudCase fraudCase, String embedding) {
 
         return FraudEmbedding.builder()
                 .sourceType(request.sourceType())
                 .content(request.content())
                 .fraudCase(fraudCase)
+                .embedding(embedding)
                 .build();
 
 
@@ -26,8 +27,7 @@ public class FraudEmbeddingMapper {
                 entity.getEmbeddingId(),
                 entity.getFraudCase().getCaseId(),
                 entity.getSourceType(),
-                entity.getContent(),
-                entity.getEmbedding()
+                entity.getContent()
         );
     }
 }

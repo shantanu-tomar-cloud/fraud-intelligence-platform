@@ -29,7 +29,10 @@ public class FraudEmbedding {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Transient
+    @Column(
+            name = "embedding",
+            columnDefinition = "vector(768)"
+    )
     private String embedding;
 
     @Column(nullable = false)

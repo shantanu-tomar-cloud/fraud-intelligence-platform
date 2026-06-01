@@ -7,7 +7,6 @@ public record FraudEmbeddingResponse(
         Long embeddingId,
         Long caseId,
         SourceType sourceType,
-        String content,
-        String embedding
+        String content
 ) {
 }

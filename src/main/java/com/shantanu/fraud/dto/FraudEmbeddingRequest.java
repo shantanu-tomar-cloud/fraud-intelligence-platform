@@ -13,9 +13,7 @@ public record FraudEmbeddingRequest(
         SourceType sourceType,
 
         @NotBlank
-        String content,
+        String content
 
-        @NotBlank
-        String embedding
 ) {
 }

@@ -5,7 +5,6 @@ import com.shantanu.fraud.dto.FraudEmbeddingResponse;
 import com.shantanu.fraud.service.FraudEmbeddingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +17,8 @@ public class FraudEmbeddingController {
     private final FraudEmbeddingService fraudEmbeddingService;
 
     @PostMapping
-    public FraudEmbeddingResponse create(@Valid @RequestBody FraudEmbeddingRequest request){
-        return fraudEmbeddingService.create(request);
+    public void create(@Valid @RequestBody FraudEmbeddingRequest request){
+        fraudEmbeddingService.create(request);
     }
 
     @GetMapping("/case/{caseId}")
@@ -28,8 +27,8 @@ public class FraudEmbeddingController {
     }
 
     @GetMapping("/search")
-    public List<FraudEmbeddingResponse> searchVectors(@RequestParam(value = "vector") String vector,
+    public List<FraudEmbeddingResponse> searchVectors(@RequestParam(value = "query") String query,
                                                       @RequestParam(value = "limit") int limit){
-        return fraudEmbeddingService.search(vector,limit);
+        return fraudEmbeddingService.search(query,limit);
     }
 }
