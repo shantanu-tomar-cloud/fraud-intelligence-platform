@@ -15,6 +15,9 @@ public class FraudCaseMapper {
                 .country(request.country())
                 .status(request.status())
                 .outcome(request.outcome())
+                .fraudReason(request.fraudReason())
+                .caseDescription(request.caseDescription())
+                .analystNotes(request.analystNotes())
                 .build();
     }
 
@@ -26,7 +29,10 @@ public class FraudCaseMapper {
                 entity.getAmount(),
                 entity.getCountry(),
                 entity.getStatus(),
-                entity.getOutcome()
+                entity.getOutcome(),
+                entity.getCaseDescription(),
+                entity.getFraudReason(),
+                entity.getAnalystNotes()
         );
     }
 }

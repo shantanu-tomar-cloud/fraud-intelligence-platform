@@ -8,6 +8,9 @@ public record FraudCaseResponse(
         BigDecimal amount,
         String country,
         String status,
-        String outcome
+        String outcome,
+        String caseDescription,
+        String fraudReason,
+        String analystNotes
 ) {
 }

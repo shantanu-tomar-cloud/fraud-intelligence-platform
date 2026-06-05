@@ -1,9 +1,9 @@
 package com.shantanu.fraud.service;
 
+import com.shantanu.fraud.dto.FraudCaseEvent;
 import com.shantanu.fraud.dto.FraudEmbeddingRequest;
 import com.shantanu.fraud.dto.FraudEmbeddingResponse;
 import com.shantanu.fraud.entity.FraudCase;
-import com.shantanu.fraud.entity.FraudEmbedding;
 import com.shantanu.fraud.exception.ResourceNotFoundException;
 import com.shantanu.fraud.mapper.FraudEmbeddingMapper;
 import com.shantanu.fraud.repository.FraudCaseRepository;
@@ -26,26 +26,27 @@ public class FraudEmbeddingService {
     private final EmbeddingService embeddingService;
 
     @Transactional
-    public void create(FraudEmbeddingRequest request){
-        log.info("Fetching fraudCase for id {}", request.caseId());
+    public void create(FraudCaseEvent event){
+        log.info("Fetching fraudCase for id {}", event.caseId());
         FraudCase fraudCase =
-                fraudCaseRepository.findById(request.caseId())
+                fraudCaseRepository.findById(event.caseId())
                         .orElseThrow(
                                 () -> new ResourceNotFoundException(
                                         "Fraud case not found : "
-                                                + request.caseId()));
+                                                + event.caseId()));
 
-        log.info("Generating embeddings for casiId {}", request.caseId());
-        float[] vector = embeddingService.generateEmbedding(request.content());
+        log.info("Generating embeddings for casiId {}", event.caseId());
+        String content = event.toEmbeddingText();
+        float[] vector = embeddingService.generateEmbedding(content);
 
-        log.info("Saving embedding for caseId {}", request.caseId());
+        log.info("Saving embedding for caseId {}", event.caseId());
         String pgVector =
                 toPgVector(vector);
 
         fraudEmbeddingRepository.insertEmbedding(
-                request.caseId(),
-                request.sourceType().name(),
-                request.content(),
+                event.caseId(),
+                event.status(),
+                content,
                 pgVector);
 
     }

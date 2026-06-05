@@ -2,6 +2,7 @@ package com.shantanu.fraud.service;
 
 import com.shantanu.fraud.dto.FraudCaseRequest;
 import com.shantanu.fraud.dto.FraudCaseResponse;
+import com.shantanu.fraud.entity.FraudCase;
 import com.shantanu.fraud.exception.ResourceNotFoundException;
 import com.shantanu.fraud.mapper.FraudCaseMapper;
 import com.shantanu.fraud.repository.FraudCaseRepository;
@@ -17,10 +18,13 @@ import java.util.List;
 public class FraudCaseService {
 
     private final FraudCaseRepository repository;
+    private final KafkaEventProducer fraudCaseEventProducer;
 
     public FraudCaseResponse create(FraudCaseRequest request) {
         log.info("Creating fraud case for customer {}", request.customerId());
-        return FraudCaseMapper.toResponse(repository.save(FraudCaseMapper.toEntity(request)));
+        FraudCase fraudCase = repository.save(FraudCaseMapper.toEntity(request));
+        fraudCaseEventProducer.publishCaseCreated(fraudCase);
+        return FraudCaseMapper.toResponse(fraudCase);
     }
 
     public List<FraudCaseResponse> getAllCases() {

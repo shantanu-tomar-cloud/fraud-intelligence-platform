@@ -31,6 +31,15 @@ public class FraudCase {
 
     private LocalDateTime createdAt;
 
+    @Column(length = 5000)
+    private String caseDescription;
+
+    @Column(length = 5000)
+    private String analystNotes;
+
+    @Column(length = 2000)
+    private String fraudReason;
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

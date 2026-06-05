@@ -1,6 +1,5 @@
 package com.shantanu.fraud.mapper;
 
-import com.shantanu.fraud.constant.SourceType;
 import com.shantanu.fraud.dto.FraudEmbeddingRequest;
 import com.shantanu.fraud.dto.FraudEmbeddingResponse;
 import com.shantanu.fraud.entity.FraudCase;

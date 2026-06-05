@@ -18,7 +18,7 @@ public class FraudEmbeddingController {
 
     @PostMapping
     public void create(@Valid @RequestBody FraudEmbeddingRequest request){
-        fraudEmbeddingService.create(request);
+//        fraudEmbeddingService.create(request);
     }
 
     @GetMapping("/case/{caseId}")
